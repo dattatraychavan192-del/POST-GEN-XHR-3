@@ -34,15 +34,18 @@ function makeApicall(method, url, body = null, successCb, errorCb) {
   xhr.onload = function () {
     if (xhr.status >= 200 && xhr.status <= 299) {
       let res = JSON.parse(xhr.response);
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
       if (method === "GET" && Array.isArray(res)) {
         successCb(res.reverse());
-        $("#myTooltip").on("hidden.bs.tooltip", function () {
-          // do something...
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip();
         });
       } else if (method === "POST") {
         successCb(payload, res);
-        $("#myTooltip").on("hidden.bs.tooltip", function () {
-          // do something...
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip();
         });
       } else if (method === "PATCH") {
         successCb(payload, res);
